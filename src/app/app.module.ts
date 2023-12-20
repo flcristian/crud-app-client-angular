@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    CustomDatePipe,
 
   ],
   imports: [
