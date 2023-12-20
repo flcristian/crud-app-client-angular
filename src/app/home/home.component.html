@@ -1,0 +1,28 @@
+
+
+<div *ngIf="!isLoading && !error">
+  <h1>Books</h1>
+  <p><a class="button" href="new_book.html">Create New Book</a></p>
+  <table>
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Genre</th>
+      <th>Year</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let item of items">
+      <td id="id-{{item.id}}">
+        <a href="book_detail.html">{{item.name}}</a>
+      </td>
+      <td>{{item.category}}</td>
+      <td>{{item.price}}</td>
+      <td>{{item.dateOfFabrication}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<p-progressSpinner *ngIf="isLoading"></p-progressSpinner>

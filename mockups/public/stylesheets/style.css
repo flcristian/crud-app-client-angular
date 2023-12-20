@@ -10,9 +10,9 @@ a {
   transition: 0.4s;
 }
 
-a:hover {
-  color: black;
-}
+  a:hover {
+    color: black;
+  }
 
 .button, input[type=button] {
   color: white;
@@ -32,9 +32,9 @@ input[type=button] {
   border: 0;
 }
 
-.button:hover, input[type=button]:hover {
-  background-color: #01b189;
-}
+  .button:hover, input[type=button]:hover {
+    background-color: #01b189;
+  }
 
 p {
   margin: 20px auto;
