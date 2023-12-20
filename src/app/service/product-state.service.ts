@@ -19,6 +19,10 @@ export class ProductStateService {
     this.productsSubject.next(products);
   }
 
+  addProductToState(newProduct: Product) {
+    this.productsSubject.next([...this.productsSubject.value, newProduct]);
+  }
+
   setLoading(loading: boolean) {
     this.loadingSubject.next(loading);
   }

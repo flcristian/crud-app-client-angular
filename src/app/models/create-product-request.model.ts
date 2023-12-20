@@ -1,5 +1,4 @@
-export interface Product{
-  id:number,
+export interface CreateProductRequest {
   price:number,
   name:string,
   category:string,

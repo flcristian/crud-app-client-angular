@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {catchError, Observable, throwError} from "rxjs";
+import {catchError, Observable, tap, throwError} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Product} from "../models/product.model";
 import {ProductStateService} from "./product-state.service";
+import {CreateProductRequest} from "../models/create-product-request.model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,16 @@ export class ProductsService {
       }
     });
   }
+
+  createProduct(newProduct: CreateProductRequest): Observable<Product> {
+    return this.http.post<CreateProductRequest>(`${this.server}/create`, newProduct).pipe(
+      catchError(this.handleError),
+      tap(product => {
+        this.productState.addProductToState(product);
+      })
+    );
+  }
+
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
