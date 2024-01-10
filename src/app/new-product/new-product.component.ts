@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductsService} from "../service/products.service";
 import {ProductStateService} from "../service/product-state.service";
 import {CreateProductRequest} from "../models/create-product-request.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-product',
@@ -33,7 +34,8 @@ export class NewProductComponent {
 
   constructor(
     private productService: ProductsService,
-    private productState: ProductStateService
+    private productState: ProductStateService,
+    private router: Router
   ) { }
 
   onSubmit() {
@@ -51,5 +53,9 @@ export class NewProductComponent {
   private dateValidator(control: FormControl): { [s: string]: boolean } | null {
     if (control.value === new Date()) return { 'required': true};
     return null;
+  }
+
+  loadHome(){
+    this.router.navigate(['/home'])
   }
 }

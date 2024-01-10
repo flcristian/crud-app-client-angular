@@ -25,5 +25,9 @@
     <input type="date" formControlName="dateOfFabrication" id="dateOfFabrication">
     <p-message *ngIf="productForm.get('dateOfFabrication')?.touched&&productForm.get('dateOfFabrication')!.hasError('required')" severity="error" text="Date of fabrication is required."></p-message>
   </div>
-  <p-button [disabled]="productForm.invalid" pRipple type="submit">Submit</p-button>
+  <div class="card flex flex-wrap gap-3 justify-content-center">
+    <p-button [disabled]="productForm.invalid" pRipple type="submit" [rounded]="true">Submit</p-button>
+    <p-button (click)="loadHome()" pRipple severity="danger" [rounded]="true">Cancel</p-button>
+  </div>
+
 </form>

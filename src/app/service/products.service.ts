@@ -33,14 +33,13 @@ export class ProductsService {
   }
 
   createProduct(newProduct: CreateProductRequest): Observable<Product> {
-    return this.http.post<CreateProductRequest>(`${this.server}/create`, newProduct).pipe(
+    return this.http.post<Product>(`${this.server}/create`, newProduct).pipe(
       catchError(this.handleError),
       tap(product => {
         this.productState.addProductToState(product);
       })
     );
   }
-
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
