@@ -34,25 +34,11 @@ export class ProductsService {
 
   createProduct(newProduct: CreateProductRequest): Observable<Product> {
     return this.http.post<Product>(`${this.server}/create`, newProduct).pipe(
-      catchError(this.handleError),
-      tap(product => {
-        this.productState.addProductToState(product);
-      })
+      catchError(this.handleError)
     );
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    console.log(error);
-    let errorMessage: string;
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `A client error occurred - ${error.error.message}`;
-    } else {
-      if (error.error.reason) {
-        errorMessage = `${error.error.reason} - Error code ${error.status}`;
-      } else {
-        errorMessage = `An error occurred - Error code ${error.status}`;
-      }
-    }
-    return throwError(()=>errorMessage);
+    return throwError(() => `Error code ${error.status} : ${error.error}`);
   }
 }

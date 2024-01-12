@@ -1,6 +1,26 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('assets/fonts/Rubik-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+  font-family: 'Rubik', 'sans-serif';
+}
+
+.form-control-container{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
 body {
   padding: 10px 50px 50px;
-  font: 18px "Garamond", serif;
 }
 
 a {
@@ -17,7 +37,6 @@ a:hover {
 .button, input[type=button] {
   color: white;
   background: #019875;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
   font-size: 14px;
   border-radius: 2px;
@@ -72,14 +91,12 @@ td {
 
 label {
   font-weight: bold;
-  min-width: 130px;
   display: inline-block;
   transition: 0.4s;
 }
 
 input {
   padding: 10px;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 14px;
   border-radius: 2px;
   border-color: #E7E7E7;

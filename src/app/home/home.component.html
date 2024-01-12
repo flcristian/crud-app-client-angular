@@ -1,31 +1,33 @@
-<div *ngIf="!(productState.loading$ | async)">
-  <h1>Products</h1>
-  <table>
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Price</th>
-      <th>Date of Fabrication</th>
-    </tr>
-    </thead>
-    <tbody>
+<div style="display: flex; flex-direction: column; gap: 20px" *ngIf="!(productState.loading$ | async) && !(productState.error$ | async)">
+  <div>
+    <h1>Products</h1>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Date of Fabrication</th>
+      </tr>
+      </thead>
+      <tbody>
 
-    <tr *ngFor="let item of (productState.products$ | async)">
-      <td id="id-{{item.id}}">
-        <a href="book_detail.html">{{item.name}}</a>
-      </td>
-      <td>{{item.category}}</td>
-      <td>{{item.price}}</td>
-      <td>{{item.dateOfFabrication | customDate}}</td>
-    </tr>
-    </tbody>
-  </table>
+      <tr *ngFor="let item of (productState.products$ | async)">
+        <td id="id-{{item.id}}">
+          <a href="">{{item.name}}</a>
+        </td>
+        <td>{{item.category}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.dateOfFabrication | customDate}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
   <p-button (click)="loadAddNewProduct()">Add new product</p-button>
 </div>
 
-<div *ngIf="(productState.error$ | async) as error">{{ error }}</div>
+<p-message severity="error" *ngIf="(productState.error$ | async) as error" text="{{ error }}"></p-message>
 <p-progressSpinner *ngIf="(productState.loading$ | async)"></p-progressSpinner>
 
 

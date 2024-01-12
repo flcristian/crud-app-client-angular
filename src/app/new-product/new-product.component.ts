@@ -33,14 +33,20 @@ export class NewProductComponent {
   });
 
   constructor(
-    private productService: ProductsService,
-    private productState: ProductStateService,
+    public productService: ProductsService,
+    public productState: ProductStateService,
     private router: Router
   ) { }
 
   onSubmit() {
-    this.productService.createProduct(this.productForm.value as CreateProductRequest).subscribe(data=>{
-        console.log(data);
+    this.productService.createProduct(this.productForm.value as CreateProductRequest).subscribe(
+      {
+        next:(data)=>{
+
+        },
+        error:(err)=>{
+          this.productState.setError(err);
+        }
       }
     )
   }
@@ -57,5 +63,6 @@ export class NewProductComponent {
 
   loadHome(){
     this.router.navigate(['/home'])
+    this.productState.setError(null)
   }
 }
