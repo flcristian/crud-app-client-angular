@@ -13,8 +13,8 @@
       <tbody>
 
       <tr *ngFor="let item of (productState.products$ | async)">
-        <td id="id-{{item.id}}">
-          <a href="">{{item.name}}</a>
+        <td>
+          <a (click)="loadUpdateProduct(item.id)" style="cursor: pointer">{{item.name}}</a>
         </td>
         <td>{{item.category}}</td>
         <td>{{item.price}}</td>

@@ -1,6 +1,6 @@
 <main style="display: flex; flex-direction: column; gap: 20px">
   <section>
-    <h1>New Product</h1>
+    <h1>Update Product</h1>
     <form style="display: flex; flex-direction: column; gap: 20px" [formGroup]="productForm" (ngSubmit)="onSubmit()">
       <div class="form-control-container">
         <label for="name">Name</label>
@@ -28,8 +28,9 @@
         <p-message *ngIf="productForm.get('dateOfFabrication')?.touched&&productForm.get('dateOfFabrication')!.hasError('required')" severity="error" text="Date of fabrication is required."></p-message>
       </div>
       <div style="display: flex; gap: 10px">
-        <p-button [disabled]="productForm.invalid" type="submit" [rounded]="true">Submit</p-button>
-        <p-button (click)="loadHome()" severity="danger" [rounded]="true">Cancel</p-button>
+        <p-button [disabled]="productForm.invalid" type="submit" severity="success" [rounded]="true">Submit</p-button>
+        <p-button (click)="loadHome()" [rounded]="true">Cancel</p-button>
+        <p-button severity="danger" [rounded]="true">Delete</p-button>
       </div>
     </form>
   </section>

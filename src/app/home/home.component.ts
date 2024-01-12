@@ -1,7 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductsService} from "../service/products.service";
-import {Product} from "../models/product.model";
-import {Subscription} from "rxjs";
 import {ProductStateService} from "../service/product-state.service";
 import {Router} from "@angular/router";
 
@@ -13,10 +11,11 @@ import {Router} from "@angular/router";
 export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
-     public productService: ProductsService,
-     public productState: ProductStateService,
-     private router: Router
-  ) { }
+    public productService: ProductsService,
+    public productState: ProductStateService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
     this.productService.getProducts();
@@ -25,7 +24,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  loadAddNewProduct(){
+  loadAddNewProduct() {
     this.router.navigate(['/create-product'])
+  }
+
+  loadUpdateProduct(id: number) {
+    this.router.navigate([`/update-product`, id]);
   }
 }

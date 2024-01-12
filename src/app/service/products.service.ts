@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Product} from "../models/product.model";
 import {ProductStateService} from "./product-state.service";
 import {CreateProductRequest} from "../models/create-product-request.model";
+import {UpdateProductRequest} from "../models/update-product-request.model";
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,13 @@ export class ProductsService {
       catchError(this.handleError)
     );
   }
+
+  updateProduct(updatedProduct: UpdateProductRequest): Observable<Product>{
+    return this.http.put<Product>(`${this.server}/update`, updatedProduct).pipe(
+      catchError(this.handleError)
+    );
+  }
+  
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     return throwError(() => `Error code ${error.status} : ${error.error}`);

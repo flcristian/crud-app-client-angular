@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import {RippleModule} from "primeng/ripple";
 import {MessageModule} from "primeng/message";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     HomeComponent,
     CustomDatePipe,
     NewProductComponent,
+    UpdateProductComponent,
   ],
   imports: [
     BrowserModule,
