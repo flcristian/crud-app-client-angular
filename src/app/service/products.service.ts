@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {catchError, Observable, tap, throwError} from "rxjs";
+import {catchError, Observable, Subject, Subscription, tap, throwError} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Product} from "../models/product.model";
 import {ProductStateService} from "./product-state.service";
@@ -13,40 +13,20 @@ export class ProductsService {
   private server = "http://localhost:5026/api/v1/Product";
   constructor(private http: HttpClient, private productState: ProductStateService) { }
 
-  getProducts(): void {
+  getProducts(): Observable<Product[]> {
     this.productState.setLoading(true);
-    this.http.get<Product[]>(this.server + "/all").pipe(
-      catchError(this.handleError)
-    ).subscribe({
-      next: (products) => {
-        setTimeout(() => {
-          this.productState.setProducts(products);
-          this.productState.setLoading(false);
-        }, 500)
-      },
-      error: (error) => {
-        setTimeout(() => {
-          this.productState.setError(error);
-          this.productState.setLoading(false);
-        }, 500)
-      }
-    });
+    return this.http.get<Product[]>(this.server + "/all")
   }
 
   createProduct(newProduct: CreateProductRequest): Observable<Product> {
-    return this.http.post<Product>(`${this.server}/create`, newProduct).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.post<Product>(`${this.server}/create`, newProduct)
   }
 
-  updateProduct(updatedProduct: UpdateProductRequest): Observable<Product>{
-    return this.http.put<Product>(`${this.server}/update`, updatedProduct).pipe(
-      catchError(this.handleError)
-    );
+  updateProduct(updatedProduct: UpdateProductRequest): Observable<Product> {
+    return this.http.put<Product>(`${this.server}/update`, updatedProduct)
   }
-  
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    return throwError(() => `Error code ${error.status} : ${error.error}`);
+  deleteProduct(id: number): Observable<Product> {
+    return this.http.delete<Product>(`${this.server}/delete/${id}`)
   }
 }

@@ -33,8 +33,5 @@
       </div>
     </form>
   </section>
-  <section *ngIf="productState.error$ | async as error">
-    <p-message severity="error" text="{{error}}"></p-message>
-  </section>
+  <p-toast></p-toast>
 </main>
-

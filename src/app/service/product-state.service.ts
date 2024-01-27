@@ -19,8 +19,31 @@ export class ProductStateService {
     this.productsSubject.next(products);
   }
 
-  addProductToState(newProduct: Product) {
+  addProduct(newProduct: Product) {
     this.productsSubject.next([...this.productsSubject.value, newProduct]);
+  }
+
+  updateProduct(product: Product){
+    let products: Product[] = this.productsSubject.value;
+    let newProducts: Product[] = []
+
+    products.forEach(p => {
+      if(p.id != product.id) newProducts.push(p)
+      else newProducts.push(product)
+    })
+
+    this.productsSubject.next(newProducts)
+  }
+
+  deleteProduct(product: Product){
+    let products: Product[] = this.productsSubject.value;
+    let newProducts: Product[] = []
+
+    products.forEach(p => {
+      if(p.id != product.id) newProducts.push(p)
+    })
+
+    this.productsSubject.next(newProducts)
   }
 
   setLoading(loading: boolean) {

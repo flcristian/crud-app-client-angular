@@ -4,6 +4,7 @@ import {ProductsService} from "../service/products.service";
 import {ProductStateService} from "../service/product-state.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {UpdateProductRequest} from "../models/update-product-request.model";
+import {Product} from "../models/product.model";
 
 @Component({
   selector: 'app-update-product',
@@ -49,17 +50,16 @@ export class UpdateProductComponent {
   onSubmit() {
     let request = this.productForm.value as UpdateProductRequest;
     request.id = this.userId;
-    console.log(request)
-    this.productService.updateProduct(request).subscribe(
-      {
-        next:(data)=>{
 
-        },
-        error:(err)=>{
-          this.productState.setError(err);
-        }
+    this.productService.updateProduct(request).subscribe({
+      next: (product: Product) => {
+        this.productState.updateProduct(product)
+        this.loadHome()
+      },
+      error: (error) => {
+        this.productState.setError(error)
       }
-    )
+    })
   }
 
   private priceValidator(control: FormControl): { [s: string]: boolean } | null {
@@ -75,5 +75,17 @@ export class UpdateProductComponent {
   loadHome(){
     this.router.navigate(['/home'])
     this.productState.setError(null)
+  }
+
+  deleteProduct() {
+    this.productService.deleteProduct(this.userId).subscribe({
+      next: (product: Product) => {
+        this.productState.deleteProduct(product);
+        this.loadHome()
+      },
+      error: (error) => {
+        this.productState.setError(error)
+      }
+    })
   }
 }

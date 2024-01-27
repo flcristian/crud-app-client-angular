@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +14,10 @@ import {RippleModule} from "primeng/ripple";
 import {MessageModule} from "primeng/message";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { HttpErrorInterceptor} from "./interceptors/http-error.interceptor";
+import {MessageService} from "primeng/api";
+import {MessagesModule} from "primeng/messages";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -34,9 +38,18 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     FormsModule,
     CommonModule,
     RippleModule,
-    MessageModule
+    MessageModule,
+    MessagesModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [
+    MessageService,
+    {
+       provide:HTTP_INTERCEPTORS,
+       useClass:HttpErrorInterceptor,
+       multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

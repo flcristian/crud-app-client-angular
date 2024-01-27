@@ -30,7 +30,7 @@
       <div style="display: flex; gap: 10px">
         <p-button [disabled]="productForm.invalid" type="submit" severity="success" [rounded]="true">Submit</p-button>
         <p-button (click)="loadHome()" [rounded]="true">Cancel</p-button>
-        <p-button severity="danger" [rounded]="true">Delete</p-button>
+        <p-button (click)="deleteProduct()" severity="danger" [rounded]="true">Delete</p-button>
       </div>
     </form>
   </section>

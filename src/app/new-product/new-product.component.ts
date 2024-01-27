@@ -4,6 +4,7 @@ import {ProductsService} from "../service/products.service";
 import {ProductStateService} from "../service/product-state.service";
 import {CreateProductRequest} from "../models/create-product-request.model";
 import {Router} from "@angular/router";
+import {Product} from "../models/product.model";
 
 @Component({
   selector: 'app-new-product',
@@ -39,16 +40,15 @@ export class NewProductComponent {
   ) { }
 
   onSubmit() {
-    this.productService.createProduct(this.productForm.value as CreateProductRequest).subscribe(
-      {
-        next:(data)=>{
-
-        },
-        error:(err)=>{
-          this.productState.setError(err);
-        }
+    this.productService.createProduct(this.productForm.value as CreateProductRequest).subscribe({
+      next: (product: Product) => {
+        this.productState.addProduct(product)
+        this.loadHome()
+      },
+      error: (error) => {
+        this.productState.setError(error)
       }
-    )
+    })
   }
 
   private priceValidator(control: FormControl): { [s: string]: boolean } | null {
